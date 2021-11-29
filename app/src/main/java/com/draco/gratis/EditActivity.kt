@@ -13,11 +13,10 @@ class EditActivity : AppCompatActivity() {
 
     private lateinit var text: EditText
 
-    private val openDocument = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
+    private val openDocument = registerForActivityResult(ActivityResultContracts.CreateDocument()) {
         if (it != null)
             viewModel.saveTextToUri(it)
-        else
-            finish()
+        finish()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,5 +54,5 @@ class EditActivity : AppCompatActivity() {
         super.onPause()
     }
 
-    override fun onBackPressed() = openDocument.launch(arrayOf("*/*"))
+    override fun onBackPressed() = openDocument.launch("")
 }
