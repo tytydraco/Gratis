@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="HorizontalScrollView">
+        <item name="android:scrollbars">none</item>
+    </style>
+    <style name="Text">
+        <item name="android:padding">8dp</item>
+        <item name="android:gravity">top</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:inputType">textMultiLine|textNoSuggestions</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
+</resources>
