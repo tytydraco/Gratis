@@ -50,9 +50,12 @@ class EditActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
-        viewModel.content.postValue(text.text.toString())
+        viewModel.updateContents(text.text.toString())
         super.onPause()
     }
 
-    override fun onBackPressed() = openDocument.launch("")
+    override fun onBackPressed() {
+        viewModel.updateContents(text.text.toString())
+        openDocument.launch("")
+    }
 }

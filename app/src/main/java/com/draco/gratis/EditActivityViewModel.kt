@@ -3,6 +3,7 @@ package com.draco.gratis
 import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class EditActivityViewModel(application: Application) : AndroidViewModel(application) {
@@ -10,11 +11,13 @@ class EditActivityViewModel(application: Application) : AndroidViewModel(applica
 
     private val contentResolver = application.contentResolver
 
-    val content = MutableLiveData("")
+    private val _content = MutableLiveData("")
+    val content: LiveData<String> = _content
+
     private var initialHashCode = -1
 
     private fun loadText(text: String) {
-        content.postValue(text)
+        _content.postValue(text)
         initialHashCode = text.hashCode()
     }
 
@@ -46,7 +49,11 @@ class EditActivityViewModel(application: Application) : AndroidViewModel(applica
             .openOutputStream(uri)
             ?.bufferedWriter()
             .use {
-                it?.write(content.value)
+                it?.write(_content.value)
             }
+    }
+
+    fun updateContents(text: String) {
+        _content.postValue(text)
     }
 }
