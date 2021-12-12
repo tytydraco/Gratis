@@ -11,13 +11,19 @@ class EditActivityViewModel(application: Application) : AndroidViewModel(applica
     private val contentResolver = application.contentResolver
 
     val content = MutableLiveData("")
+    private var initialHashCode = -1
 
-    fun loadText(text: String) {
+    private fun loadText(text: String) {
+        content.postValue(text)
+        initialHashCode = text.hashCode()
+    }
+
+    fun loadTextFromString(text: String) {
         if (handled)
             return
         handled = true
 
-        content.postValue(text)
+        loadText(text)
     }
 
     fun loadTextFromUri(uri: Uri) {
@@ -30,7 +36,7 @@ class EditActivityViewModel(application: Application) : AndroidViewModel(applica
             ?.bufferedReader()
             .use { reader ->
                 reader?.readText()?.let {
-                    content.postValue(it)
+                    loadText(it)
                 }
             }
     }

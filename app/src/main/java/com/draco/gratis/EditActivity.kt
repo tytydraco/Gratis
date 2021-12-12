@@ -33,7 +33,7 @@ class EditActivity : AppCompatActivity() {
         when (intent?.action) {
             Intent.ACTION_SEND -> {
                 intent?.getStringExtra(Intent.EXTRA_TEXT)?.let {
-                    viewModel.loadText(it)
+                    viewModel.loadTextFromString(it)
                 }
 
                 intent?.extras?.get(Intent.EXTRA_STREAM)?.let {
