@@ -16,17 +16,16 @@ class EditActivityViewModel(application: Application) : AndroidViewModel(applica
 
     private var initialHashCode = -1
 
-    private fun loadText(text: String) {
-        _content.postValue(text)
-        initialHashCode = text.hashCode()
-    }
-
     fun loadTextFromString(text: String) {
         if (handled)
             return
         handled = true
 
-        loadText(text)
+        /*
+         * We imported raw text, not URI contents. We do not know if there was ever
+         * an original file to compare to. Do not save the checksum.
+         */
+        _content.postValue(text)
     }
 
     fun loadTextFromUri(uri: Uri) {
@@ -39,7 +38,8 @@ class EditActivityViewModel(application: Application) : AndroidViewModel(applica
             ?.bufferedReader()
             .use { reader ->
                 reader?.readText()?.let {
-                    loadText(it)
+                    _content.postValue(it)
+                    initialHashCode = it.hashCode()
                 }
             }
     }
