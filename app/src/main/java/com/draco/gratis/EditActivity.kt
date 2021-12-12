@@ -55,7 +55,13 @@ class EditActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        viewModel.updateContents(text.text.toString())
-        openDocument.launch("")
+        val content = text.text.toString()
+
+        if (viewModel.contentsChanged(content)) {
+            viewModel.updateContents(content)
+            openDocument.launch("")
+        } else {
+            super.onBackPressed()
+        }
     }
 }

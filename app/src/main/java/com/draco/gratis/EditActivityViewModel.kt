@@ -56,4 +56,7 @@ class EditActivityViewModel(application: Application) : AndroidViewModel(applica
     fun updateContents(text: String) {
         _content.postValue(text)
     }
+
+    fun contentsChanged(text: String) =
+        initialHashCode != text.hashCode()
 }
