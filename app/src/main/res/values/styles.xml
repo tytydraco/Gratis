@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="HorizontalScrollView">
+    <style name="ScrollView">
         <item name="android:scrollbars">none</item>
     </style>
     <style name="Text">
